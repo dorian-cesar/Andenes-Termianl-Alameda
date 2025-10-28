@@ -21,35 +21,36 @@ export function AlertsPanel() {
 
   const unreadCount = alerts.filter((a) => !a.read).length;
 
+  // Colores ajustados a dark theme
   const alertConfig = {
     warning: {
       icon: AlertCircle,
-      color: "text-amber-600",
-      bg: "bg-amber-50 border-amber-200",
-      badge: "bg-amber-100 text-amber-700",
+      color: "text-amber-400",
+      bg: "bg-[#332a00] border-amber-600", // oscuro con tono cálido
+      badge: "bg-amber-700 text-amber-100",
     },
     error: {
       icon: XCircle,
-      color: "text-red-600",
-      bg: "bg-red-50 border-red-200",
-      badge: "bg-red-100 text-red-700",
+      color: "text-red-400",
+      bg: "bg-[#2a0000] border-red-700",
+      badge: "bg-red-700 text-red-100",
     },
     info: {
       icon: Info,
-      color: "text-blue-600",
-      bg: "bg-blue-50 border-blue-200",
-      badge: "bg-blue-100 text-blue-700",
+      color: "text-blue-400",
+      bg: "bg-[#001a33] border-blue-700",
+      badge: "bg-blue-700 text-blue-100",
     },
     success: {
       icon: CheckCircle,
-      color: "text-green-600",
-      bg: "bg-green-50 border-green-200",
-      badge: "bg-green-100 text-green-700",
+      color: "text-green-400",
+      bg: "bg-[#002a1a] border-green-700",
+      badge: "bg-green-700 text-green-100",
     },
   };
 
   return (
-    <Card className="animate-bounce-in">
+    <Card className="animate-slide-in-up bg-card border-border">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -64,7 +65,12 @@ export function AlertsPanel() {
             )}
           </div>
           {alerts.length > 0 && (
-            <Button variant="ghost" size="sm" onClick={clearAllAlerts}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearAllAlerts}
+              className="text-muted-foreground hover:text-black"
+            >
               <Trash2 className="w-4 h-4 mr-2" />
               Limpiar todo
             </Button>
@@ -104,13 +110,13 @@ export function AlertsPanel() {
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2 mb-1">
-                          <h4 className="font-semibold text-sm">
+                          <h4 className="font-semibold text-sm text-foreground">
                             {alert.title}
                           </h4>
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-6 w-6 shrink-0 hover-scale"
+                            className="h-6 w-6 shrink-0 hover-scale text-muted-foreground hover:text-destructive"
                             onClick={(e) => {
                               e.stopPropagation();
                               clearAlert(alert.id);
@@ -135,7 +141,7 @@ export function AlertsPanel() {
                           {!alert.read && (
                             <Badge
                               variant="secondary"
-                              className="text-xs bg-primary text-primary-foreground"
+                              className={cn("text-xs", config.badge)}
                             >
                               Nueva
                             </Badge>
