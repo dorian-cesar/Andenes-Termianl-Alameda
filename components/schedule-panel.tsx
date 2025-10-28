@@ -1,37 +1,52 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import type { BusSchedule } from "@/types/schedule"
-import { generateMockSchedule } from "@/lib/schedule-data"
-import { ArrowRight, Clock, MapPin, AlertCircle, CheckCircle, XCircle } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import type { BusSchedule } from "@/types/schedule";
+import { generateMockSchedule } from "@/lib/schedule-data";
+import {
+  ArrowRight,
+  Clock,
+  MapPin,
+  AlertCircle,
+  CheckCircle,
+  XCircle,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function SchedulePanel() {
-  const [schedules, setSchedules] = useState<BusSchedule[]>([])
+  const [schedules, setSchedules] = useState<BusSchedule[]>([]);
 
   useEffect(() => {
     // Initial load - simulates Kupos API call
-    setSchedules(generateMockSchedule())
+    setSchedules(generateMockSchedule());
 
     // Simulate real-time updates every 30 seconds
     const interval = setInterval(() => {
-      setSchedules(generateMockSchedule())
-    }, 30000)
+      setSchedules(generateMockSchedule());
+    }, 30000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
-  const departures = schedules.filter((s) => s.type === "salida" && s.status !== "completado")
-  const arrivals = schedules.filter((s) => s.type === "llegada" && s.status !== "completado")
+  const departures = schedules.filter(
+    (s) => s.type === "salida" && s.status !== "completado"
+  );
+  const arrivals = schedules.filter(
+    (s) => s.type === "llegada" && s.status !== "completado"
+  );
 
   return (
     <Card className="animate-scale-in">
       <CardHeader>
-        <CardTitle className="text-primary">Próximas Salidas y Llegadas</CardTitle>
-        <p className="text-sm text-muted-foreground">Datos sincronizados con Kupos API</p>
+        <CardTitle className="text-primary">
+          Próximas Salidas y Llegadas
+        </CardTitle>
+        <p className="text-sm text-muted-foreground">
+          Datos sincronizados con Kupos API
+        </p>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="salidas" className="w-full">
@@ -52,23 +67,31 @@ export function SchedulePanel() {
 
           <TabsContent value="salidas" className="space-y-3 mt-4">
             {departures.length === 0 ? (
-              <p className="text-center text-muted-foreground py-8">No hay salidas programadas</p>
+              <p className="text-center text-muted-foreground py-8">
+                No hay salidas programadas
+              </p>
             ) : (
-              departures.map((schedule) => <ScheduleCard key={schedule.id} schedule={schedule} />)
+              departures.map((schedule) => (
+                <ScheduleCard key={schedule.id} schedule={schedule} />
+              ))
             )}
           </TabsContent>
 
           <TabsContent value="llegadas" className="space-y-3 mt-4">
             {arrivals.length === 0 ? (
-              <p className="text-center text-muted-foreground py-8">No hay llegadas programadas</p>
+              <p className="text-center text-muted-foreground py-8">
+                No hay llegadas programadas
+              </p>
             ) : (
-              arrivals.map((schedule) => <ScheduleCard key={schedule.id} schedule={schedule} />)
+              arrivals.map((schedule) => (
+                <ScheduleCard key={schedule.id} schedule={schedule} />
+              ))
             )}
           </TabsContent>
         </Tabs>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function ScheduleCard({ schedule }: { schedule: BusSchedule }) {
@@ -101,37 +124,45 @@ function ScheduleCard({ schedule }: { schedule: BusSchedule }) {
       badge: "bg-gray-100 text-gray-700",
       label: "Completado",
     },
-  }
+  };
 
-  const config = statusConfig[schedule.status]
-  const StatusIcon = config.icon
+  const config = statusConfig[schedule.status];
+  const StatusIcon = config.icon;
 
   const formatTime = (date: Date) => {
     return new Date(date).toLocaleTimeString("es-PE", {
       hour: "2-digit",
       minute: "2-digit",
-    })
-  }
+    });
+  };
 
   const getTimeUntil = (date: Date) => {
-    const now = new Date()
-    const diff = new Date(date).getTime() - now.getTime()
-    const hours = Math.floor(diff / (1000 * 60 * 60))
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+    const now = new Date();
+    const diff = new Date(date).getTime() - now.getTime();
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
-    if (hours > 0) return `En ${hours}h ${minutes}m`
-    if (minutes > 0) return `En ${minutes}m`
-    return "Ahora"
-  }
+    if (hours > 0) return `En ${hours}h ${minutes}m`;
+    if (minutes > 0) return `En ${minutes}m`;
+    return "Ahora";
+  };
 
   return (
-    <div className={cn("border rounded-lg p-4 hover-lift transition-smooth", config.bg)}>
+    <div
+      className={cn(
+        "border rounded-lg p-4 hover-lift transition-smooth",
+        config.bg
+      )}
+    >
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1 space-y-3">
           {/* Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Badge variant="outline" className="font-semibold border-primary text-primary">
+              <Badge
+                variant="outline"
+                className="font-semibold border-primary text-primary"
+              >
                 {schedule.company}
               </Badge>
               <Badge variant="secondary" className={config.badge}>
@@ -139,16 +170,22 @@ function ScheduleCard({ schedule }: { schedule: BusSchedule }) {
                 {config.label}
               </Badge>
             </div>
-            <span className="text-sm text-muted-foreground">{schedule.plateNumber}</span>
+            <span className="text-sm text-muted-foreground">
+              {schedule.plateNumber}
+            </span>
           </div>
 
           {/* Route */}
           <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+            <MapPin className="w-4 h-4 text-muted-foreground shrink-0" />
             <div className="flex items-center gap-2 flex-1">
-              <span className="font-medium">{schedule.origin || schedule.route.split(" - ")[0]}</span>
+              <span className="font-medium">
+                {schedule.origin || schedule.route.split(" - ")[0]}
+              </span>
               <ArrowRight className="w-4 h-4 text-muted-foreground" />
-              <span className="font-medium">{schedule.destination || schedule.route.split(" - ")[1]}</span>
+              <span className="font-medium">
+                {schedule.destination || schedule.route.split(" - ")[1]}
+              </span>
             </div>
           </div>
 
@@ -157,13 +194,17 @@ function ScheduleCard({ schedule }: { schedule: BusSchedule }) {
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-muted-foreground" />
               <span className="text-muted-foreground">Programado:</span>
-              <span className="font-semibold">{formatTime(schedule.scheduledTime)}</span>
+              <span className="font-semibold">
+                {formatTime(schedule.scheduledTime)}
+              </span>
             </div>
 
             {schedule.actualTime && (
               <div className="flex items-center gap-2">
                 <span className="text-muted-foreground">Real:</span>
-                <span className={cn("font-semibold", config.color)}>{formatTime(schedule.actualTime)}</span>
+                <span className={cn("font-semibold", config.color)}>
+                  {formatTime(schedule.actualTime)}
+                </span>
               </div>
             )}
 
@@ -179,7 +220,10 @@ function ScheduleCard({ schedule }: { schedule: BusSchedule }) {
             {schedule.platformNumber && (
               <div className="flex items-center gap-2">
                 <span className="text-muted-foreground">Andén:</span>
-                <Badge variant="outline" className="font-bold bg-primary text-primary-foreground">
+                <Badge
+                  variant="outline"
+                  className="font-bold bg-primary text-primary-foreground"
+                >
                   A{schedule.platformNumber}
                 </Badge>
               </div>
@@ -193,5 +237,5 @@ function ScheduleCard({ schedule }: { schedule: BusSchedule }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
