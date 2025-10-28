@@ -1,17 +1,25 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { useWebSocket } from "@/contexts/websocket-context"
-import { AlertCircle, CheckCircle, Info, XCircle, X, Trash2 } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { useWebSocket } from "@/contexts/websocket-context";
+import {
+  AlertCircle,
+  CheckCircle,
+  Info,
+  XCircle,
+  X,
+  Trash2,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function AlertsPanel() {
-  const { alerts, markAlertAsRead, clearAlert, clearAllAlerts } = useWebSocket()
+  const { alerts, markAlertAsRead, clearAlert, clearAllAlerts } =
+    useWebSocket();
 
-  const unreadCount = alerts.filter((a) => !a.read).length
+  const unreadCount = alerts.filter((a) => !a.read).length;
 
   const alertConfig = {
     warning: {
@@ -38,7 +46,7 @@ export function AlertsPanel() {
       bg: "bg-green-50 border-green-200",
       badge: "bg-green-100 text-green-700",
     },
-  }
+  };
 
   return (
     <Card className="animate-bounce-in">
@@ -47,7 +55,10 @@ export function AlertsPanel() {
           <div className="flex items-center gap-2">
             <CardTitle className="text-primary">Alertas del Sistema</CardTitle>
             {unreadCount > 0 && (
-              <Badge variant="destructive" className="rounded-full animate-pulse">
+              <Badge
+                variant="destructive"
+                className="rounded-full animate-pulse"
+              >
                 {unreadCount}
               </Badge>
             )}
@@ -70,8 +81,8 @@ export function AlertsPanel() {
           ) : (
             <div className="space-y-3">
               {alerts.map((alert) => {
-                const config = alertConfig[alert.type]
-                const AlertIcon = config.icon
+                const config = alertConfig[alert.type];
+                const AlertIcon = config.icon;
 
                 return (
                   <div
@@ -80,37 +91,52 @@ export function AlertsPanel() {
                       "border-2 rounded-lg p-4 hover-lift transition-smooth cursor-pointer",
                       config.bg,
                       !alert.read && "shadow-md animate-slide-in-right",
-                      alert.read && "opacity-60",
+                      alert.read && "opacity-60"
                     )}
                     onClick={() => !alert.read && markAlertAsRead(alert.id)}
                   >
                     <div className="flex items-start gap-3">
-                      <AlertIcon className={cn("w-5 h-5 flex-shrink-0 mt-0.5 hover-scale", config.color)} />
+                      <AlertIcon
+                        className={cn(
+                          "w-5 h-5 shrink-0 mt-0.5 hover-scale",
+                          config.color
+                        )}
+                      />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2 mb-1">
-                          <h4 className="font-semibold text-sm">{alert.title}</h4>
+                          <h4 className="font-semibold text-sm">
+                            {alert.title}
+                          </h4>
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-6 w-6 flex-shrink-0 hover-scale"
+                            className="h-6 w-6 shrink-0 hover-scale"
                             onClick={(e) => {
-                              e.stopPropagation()
-                              clearAlert(alert.id)
+                              e.stopPropagation();
+                              clearAlert(alert.id);
                             }}
                           >
                             <X className="w-4 h-4" />
                           </Button>
                         </div>
-                        <p className="text-sm text-muted-foreground mb-2">{alert.message}</p>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          {alert.message}
+                        </p>
                         <div className="flex items-center gap-2">
                           <span className="text-xs text-muted-foreground">
-                            {new Date(alert.timestamp).toLocaleTimeString("es-PE", {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })}
+                            {new Date(alert.timestamp).toLocaleTimeString(
+                              "es-PE",
+                              {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              }
+                            )}
                           </span>
                           {!alert.read && (
-                            <Badge variant="secondary" className="text-xs bg-primary text-primary-foreground">
+                            <Badge
+                              variant="secondary"
+                              className="text-xs bg-primary text-primary-foreground"
+                            >
                               Nueva
                             </Badge>
                           )}
@@ -118,12 +144,12 @@ export function AlertsPanel() {
                       </div>
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
           )}
         </ScrollArea>
       </CardContent>
     </Card>
-  )
+  );
 }
