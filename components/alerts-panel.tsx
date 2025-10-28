@@ -21,12 +21,11 @@ export function AlertsPanel() {
 
   const unreadCount = alerts.filter((a) => !a.read).length;
 
-  // Colores ajustados a dark theme
   const alertConfig = {
     warning: {
       icon: AlertCircle,
       color: "text-amber-400",
-      bg: "bg-[#332a00] border-amber-600", // oscuro con tono cálido
+      bg: "bg-[#332a00] border-amber-600",
       badge: "bg-amber-700 text-amber-100",
     },
     error: {
