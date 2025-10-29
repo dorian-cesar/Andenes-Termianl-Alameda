@@ -149,7 +149,7 @@ function PlatformCard({ platform }: { platform: Platform }) {
   return (
     <div
       className={cn(
-        "border-2 rounded-lg p-3 cursor-pointer hover-lift transition-all duration-300",
+        "border-2 rounded-lg p-3 hover-lift transition-all duration-300",
         config.bg
       )}
     >
