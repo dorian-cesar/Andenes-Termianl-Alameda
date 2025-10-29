@@ -40,6 +40,13 @@ export async function GET() {
 
       const url = `https://gds.kupos.com/gds/api/ui_schedules/${originId}/${destId}/${date}.json?api_key=${apiKey}`;
       const res = await fetch(url);
+
+      if (!res.ok) {
+        throw new Error(
+          `Error en la API Kupos: ${res.status} ${res.statusText}`
+        );
+      }
+
       const data = await res.json();
 
       if (Array.isArray(data.result)) {
