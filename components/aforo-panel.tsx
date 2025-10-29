@@ -125,21 +125,21 @@ export function AforoPanel() {
 function PlatformCard({ platform }: { platform: Platform }) {
   const statusConfig = {
     libre: {
-      bg: "bg-green-50 border-green-200 hover:border-green-400",
-      text: "text-green-700",
-      badge: "bg-green-100 text-green-700",
+      bg: "bg-green-900/30 border-green-800 hover:bg-green-800/40",
+      text: "text-green-300",
+      badge: "bg-green-800/60 text-green-200 border border-green-700",
       label: "Libre",
     },
     ocupado: {
-      bg: "bg-red-50 border-red-200 hover:border-red-400",
-      text: "text-red-700",
-      badge: "bg-red-100 text-red-700",
+      bg: "bg-red-900/30 border-red-800 hover:bg-red-800/40",
+      text: "text-red-300",
+      badge: "bg-red-800/60 text-red-200 border border-red-700",
       label: "Ocupado",
     },
     mantenimiento: {
-      bg: "bg-amber-50 border-amber-200 hover:border-amber-400",
-      text: "text-amber-700",
-      badge: "bg-amber-100 text-amber-700",
+      bg: "bg-amber-900/30 border-amber-800 hover:bg-amber-800/40",
+      text: "text-amber-300",
+      badge: "bg-amber-800/60 text-amber-200 border border-amber-700",
       label: "Mantenimiento",
     },
   };
@@ -149,7 +149,7 @@ function PlatformCard({ platform }: { platform: Platform }) {
   return (
     <div
       className={cn(
-        "border-2 rounded-lg p-3 cursor-pointer hover-lift transition-smooth",
+        "border-2 rounded-lg p-3 cursor-pointer hover-lift transition-all duration-300",
         config.bg
       )}
     >
@@ -161,10 +161,13 @@ function PlatformCard({ platform }: { platform: Platform }) {
           {config.label}
         </Badge>
       </div>
+
       {platform.bus && (
         <div className="space-y-1">
-          <p className="text-xs font-medium truncate">{platform.bus.company}</p>
-          <p className="text-xs text-muted-foreground truncate">
+          <p className="text-xs font-medium text-white truncate">
+            {platform.bus.company}
+          </p>
+          <p className="text-xs text-gray-400 truncate">
             {platform.bus.destination}
           </p>
         </div>
@@ -190,26 +193,29 @@ function OccupiedPlatformDetail({ platform }: { platform: Platform }) {
   return (
     <div
       className={cn(
-        "border rounded-lg p-4 transition-smooth hover-lift",
-        isOverstay && "text-black border-red-300 bg-red-50 animate-pulse-glow"
+        "rounded-lg p-4 border transition-all duration-300 hover:bg-white/10",
+        isOverstay
+          ? "bg-red-900/30 border-red-800 animate-pulse-glow"
+          : "bg-zinc-900/40 border-zinc-800"
       )}
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
+          {/* Header */}
           <div className="flex items-center gap-2 mb-2">
             <Badge
               variant="outline"
-              className="font-bold bg-primary text-primary-foreground"
+              className="font-bold bg-primary text-primary-foreground border-0"
             >
               Andén {platform.number}
             </Badge>
-            <span className="text-sm font-semibold">
+            <span className="text-sm font-semibold text-white">
               {platform.bus.company}
             </span>
             {isOverstay && (
               <Badge
                 variant="destructive"
-                className="text-xs animate-bounce-in"
+                className="text-xs bg-red-800/70 text-red-100 border border-red-700 animate-bounce-in"
               >
                 <AlertTriangle className="w-3 h-3 mr-1" />
                 Exceso de tiempo
@@ -217,21 +223,33 @@ function OccupiedPlatformDetail({ platform }: { platform: Platform }) {
             )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+          {/* Info */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-gray-300">
             <div className="flex items-center gap-2">
-              <Bus className="w-4 h-4 text-muted-foreground" />
-              <span className="text-muted-foreground">Placa:</span>
-              <span className="font-medium">{platform.bus.plateNumber}</span>
+              <Bus className="w-4 h-4 text-gray-400" />
+              <span className="text-gray-400">Placa:</span>
+              <span className="font-medium text-white">
+                {platform.bus.plateNumber}
+              </span>
             </div>
+
             <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-muted-foreground" />
-              <span className="text-muted-foreground">Destino:</span>
-              <span className="font-medium">{platform.bus.destination}</span>
+              <MapPin className="w-4 h-4 text-gray-400" />
+              <span className="text-gray-400">Destino:</span>
+              <span className="font-medium text-white">
+                {platform.bus.destination}
+              </span>
             </div>
+
             <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-muted-foreground" />
-              <span className="text-muted-foreground">Estadía:</span>
-              <span className={cn("font-medium", isOverstay && "text-red-600")}>
+              <Clock className="w-4 h-4 text-gray-400" />
+              <span className="text-gray-400">Estadía:</span>
+              <span
+                className={cn(
+                  "font-medium",
+                  isOverstay ? "text-red-400" : "text-white"
+                )}
+              >
                 {hoursParked}h {minutesParked}m
               </span>
             </div>
