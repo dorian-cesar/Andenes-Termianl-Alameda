@@ -200,7 +200,7 @@ export function BarrierControls() {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="flex-1 hover:bg-primary hover:text-primary-foreground transition-smooth bg-transparent"
+                        className="flex-1 hover:bg-primary hover:text-primary-foreground transition-smooth bg-transparent cursor-pointer"
                         onClick={() => handleBarrierAction(barrier, "open")}
                         disabled={
                           barrier.status === "abierta" ||
@@ -213,7 +213,7 @@ export function BarrierControls() {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="flex-1 hover:bg-secondary hover:text-secondary-foreground transition-smooth bg-transparent"
+                        className="flex-1 hover:bg-secondary hover:text-secondary-foreground transition-smooth bg-transparent cursor-pointer"
                         onClick={() => handleBarrierAction(barrier, "close")}
                         disabled={
                           barrier.status === "cerrada" ||
@@ -232,10 +232,12 @@ export function BarrierControls() {
         </CardContent>
       </Card>
 
-      {/* Confirmation Dialog */}
       <AlertDialog
         open={!!selectedBarrier}
-        onOpenChange={() => setSelectedBarrier(null)}
+        onOpenChange={(open) => {
+          if (isLoading) return;
+          if (!open) setSelectedBarrier(null);
+        }}
       >
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -250,10 +252,19 @@ export function BarrierControls() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isLoading}>Cancelar</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmAction} disabled={isLoading}>
+            <AlertDialogCancel
+              disabled={isLoading}
+              className="cursor-pointer disabled:cursor-not-allowed"
+            >
+              Cancelar
+            </AlertDialogCancel>
+            <Button
+              onClick={confirmAction}
+              disabled={isLoading}
+              className="cursor-pointer disabled:cursor-not-allowed"
+            >
               {isLoading ? "Enviando comando..." : "Confirmar"}
-            </AlertDialogAction>
+            </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

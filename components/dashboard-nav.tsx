@@ -50,7 +50,7 @@ export function DashboardNav() {
 
   return (
     <nav className="bg-background border-b shadow-sm sticky top-16 z-40">
-      <div className="flex items-center gap-1 px-6 overflow-x-auto">
+      <div className="flex items-center gap-1 px-6 overflow-x-auto overflow-y-hidden">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;

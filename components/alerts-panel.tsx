@@ -49,7 +49,7 @@ export function AlertsPanel() {
   };
 
   return (
-    <Card className="animate-slide-in-up bg-card border-border">
+    <Card className="animate-slide-in-up bg-card border-border h-[80vh]">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
