@@ -49,7 +49,7 @@ export function AlertsPanel() {
   };
 
   return (
-    <Card className="animate-slide-in-up bg-card border-border h-[80vh]">
+    <Card className="animate-slide-in-up bg-card border-border h-[80vh] flex flex-col">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -68,7 +68,7 @@ export function AlertsPanel() {
               variant="ghost"
               size="sm"
               onClick={clearAllAlerts}
-              className="text-muted-foreground hover:text-black"
+              className="text-muted-foreground hover:text-black cursor-pointer"
             >
               <Trash2 className="w-4 h-4 mr-2" />
               Limpiar todo
@@ -76,8 +76,8 @@ export function AlertsPanel() {
           )}
         </div>
       </CardHeader>
-      <CardContent>
-        <ScrollArea className="h-[400px] pr-4">
+      <CardContent className="flex-1 overflow-hidden">
+        <ScrollArea className="h-full pr-4">
           {alerts.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
               <CheckCircle className="w-12 h-12 mb-3 text-green-500 animate-scale-in" />
