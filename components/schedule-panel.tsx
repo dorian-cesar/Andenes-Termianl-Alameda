@@ -95,9 +95,11 @@ export function SchedulePanel() {
         <Button
           onClick={fetchSchedules}
           disabled={loading}
-          className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white cursor-pointer"
+          className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-black cursor-pointer"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw
+            className={cn("w-4 h-4", loading && "animate-spin-slow")}
+          />
           {loading ? "Actualizando..." : "Actualizar"}
         </Button>
       </CardHeader>

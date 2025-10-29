@@ -211,6 +211,15 @@
   }
 }
 
+@keyframes spin-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -261,5 +270,9 @@
 
   .transition-smooth {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-spin-slow {
+    animation: spin-reverse 1s linear infinite;
   }
 }

@@ -118,7 +118,7 @@ export function DashboardHeader() {
                 onClick={logout}
                 className="text-destructive cursor-pointer group hover:bg-destructive hover:text-white"
               >
-                <LogOut className="w-4 h-4 mr-2 group-hover:text-white" />
+                <LogOut className="w-4 h-4 mr-2 group-hover:text-black" />
                 Cerrar Sesión
               </DropdownMenuItem>
             </DropdownMenuContent>
