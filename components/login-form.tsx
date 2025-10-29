@@ -73,6 +73,7 @@ export function LoginForm() {
                 required
                 disabled={isLoading}
                 className="transition-smooth focus:ring-primary"
+                autoComplete="username"
               />
             </div>
             <div className="space-y-2">
@@ -88,6 +89,7 @@ export function LoginForm() {
                 required
                 disabled={isLoading}
                 className="transition-smooth focus:ring-primary"
+                autoComplete="current-password"
               />
             </div>
 

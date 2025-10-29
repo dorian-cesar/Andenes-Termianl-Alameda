@@ -27,8 +27,12 @@ export function DashboardHeader() {
     <header className="border-b sticky top-0 z-50 backdrop-blur-sm bg-card/95">
       <div className="flex h-16 items-center justify-between px-6">
         <div className="flex items-center gap-3 animate-slide-in-right">
-          <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-            <Bus className="w-6 h-6 text-primary-foreground" />
+          <div className="w-10 h-10 flex items-center justify-center rounded-xl shadow-md bg-transparent">
+            <img
+              src="../../favicon.ico"
+              alt="Logo"
+              className="w-8 h-8 object-contain"
+            />
           </div>
           <div>
             <h1 className="text-xl font-bold text-foreground">
@@ -56,7 +60,7 @@ export function DashboardHeader() {
           <Button
             variant="ghost"
             size="icon"
-            className="relative rounded-full hover-scale"
+            className="relative rounded-full hover-scale cursor-pointer"
             onClick={() => router.push("/dashboard/alertas")}
           >
             <Bell className="w-5 h-5" />
@@ -75,7 +79,7 @@ export function DashboardHeader() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-full hover-scale"
+                className="rounded-full hover-scale cursor-pointer"
               >
                 <User className="w-5 h-5" />
               </Button>
