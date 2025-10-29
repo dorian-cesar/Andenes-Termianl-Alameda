@@ -6,12 +6,13 @@ import { AuthProvider } from "@/contexts/auth-context";
 import { WebSocketProvider } from "@/contexts/websocket-context";
 import { AuthenticatedToaster } from "@/components/authenticated-toaster";
 import "./globals.css";
+import info from "@/config/info.json";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Control de Andenes - Terminal Alameda",
+  title: `Control de Andenes - ${info.terminal}`,
   description: "Sistema de control y gestión de andenes para terminal de buses",
 };
 

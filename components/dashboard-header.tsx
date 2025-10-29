@@ -16,6 +16,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import info from "@/config/info.json";
 
 export function DashboardHeader() {
   const { user, logout } = useAuth();
@@ -46,7 +47,7 @@ export function DashboardHeader() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-foreground">
-              Terminal Alameda
+              {info.terminal}
             </h1>
             <p className="text-xs text-muted-foreground">Control de Andenes</p>
           </div>

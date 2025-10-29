@@ -14,7 +14,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useAuth } from "@/contexts/auth-context";
-import { Bus, AlertCircle } from "lucide-react";
+import { AlertCircle } from "lucide-react";
+import info from "@/config/info.json";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -56,7 +57,7 @@ export function LoginForm() {
             />
           </div>
           <CardTitle className="text-3xl font-bold text-foreground">
-            Terminal Alameda
+            {info.terminal}
           </CardTitle>
           <CardDescription className="text-base text-muted-foreground">
             Sistema de Control de Andenes
