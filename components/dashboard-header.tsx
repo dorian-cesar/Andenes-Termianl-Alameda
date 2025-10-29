@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/auth-context";
 import { useWebSocket } from "@/contexts/websocket-context";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Bus, LogOut, User, Bell } from "lucide-react";
+import { LogOut, User, Bell } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -97,9 +97,9 @@ export function DashboardHeader() {
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={logout}
-                className="text-destructive cursor-pointer"
+                className="text-destructive cursor-pointer group hover:bg-destructive hover:text-white"
               >
-                <LogOut className="w-4 h-4 mr-2" />
+                <LogOut className="w-4 h-4 mr-2 group-hover:text-white" />
                 Cerrar Sesión
               </DropdownMenuItem>
             </DropdownMenuContent>
