@@ -15,13 +15,23 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export function DashboardHeader() {
   const { user, logout } = useAuth();
   const { isConnected, alerts } = useWebSocket();
   const router = useRouter();
-
   const unreadCount = alerts.filter((a) => !a.read).length;
+
+  const [dateTime, setDateTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => setDateTime(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formattedDate = dateTime.toLocaleDateString("es-CL"); // ej: 29/10/2025
+  const formattedTime = dateTime.toLocaleTimeString("es-CL"); // ej: 12:34:56
 
   return (
     <header className="border-b sticky top-0 z-50 backdrop-blur-sm bg-card/95">
@@ -43,7 +53,14 @@ export function DashboardHeader() {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-2 text-sm">
+          {/* Fecha y hora */}
+          <div className="hidden md:flex flex-col items-end text-xs text-muted-foreground">
+            <span>{formattedDate}</span>
+            <span>{formattedTime}</span>
+          </div>
+
+          {/* Indicador de conexión */}
+          <div className="hidden md:flex items-center gap-2 text-sm ml-4">
             <div
               className={cn(
                 "w-2 h-2 rounded-full transition-all",
@@ -57,6 +74,7 @@ export function DashboardHeader() {
             </span>
           </div>
 
+          {/* Campana de alertas */}
           <Button
             variant="ghost"
             size="icon"
@@ -74,6 +92,7 @@ export function DashboardHeader() {
             )}
           </Button>
 
+          {/* Usuario */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
