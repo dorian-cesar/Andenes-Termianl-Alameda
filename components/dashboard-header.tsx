@@ -48,8 +48,8 @@ export function DashboardHeader() {
               className={cn(
                 "w-2 h-2 rounded-full transition-all",
                 isConnected
-                  ? "bg-green-500 animate-pulse shadow-lg shadow-green-500/50"
-                  : "bg-red-500"
+                  ? "bg-green-500 animate-pulse shadow-[0_0_12px_4px_rgba(34,197,94,0.6)]"
+                  : "bg-red-500 shadow-[0_0_8px_2px_rgba(239,68,68,0.5)]"
               )}
             />
             <span className="text-muted-foreground">
