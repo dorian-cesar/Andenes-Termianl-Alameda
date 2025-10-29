@@ -102,7 +102,7 @@ export default function DashboardPage() {
       <DashboardHeader />
       <DashboardNav />
       <main className="p-6">
-        <div className="max-w-[1600px] mx-auto space-y-6 animate-fade-in">
+        <div className="max-w-[1600px] mx-auto space-y-6">
           <div className="mb-6">
             <h2 className="text-3xl font-bold text-balance">
               Bienvenido, {user.name}
@@ -119,7 +119,7 @@ export default function DashboardPage() {
               return (
                 <Card
                   key={stat.label}
-                  className="transition-all duration-300 hover:shadow-lg animate-slide-in"
+                  className="transition-all duration-300 hover:shadow-lg animate-slide-in-up"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <CardContent className="p-6">
@@ -148,7 +148,6 @@ export default function DashboardPage() {
                   <Link key={link.href} href={link.href}>
                     <Card
                       className={`hover:scale-101 transition-all duration-300 hover:shadow-xl cursor-pointer border-2 animate-scale-in ${link.color}`}
-                      style={{ animationDelay: `${(index + 4) * 100}ms` }}
                     >
                       <CardHeader>
                         <div className="flex items-center gap-3">
