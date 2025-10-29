@@ -48,8 +48,12 @@ export function LoginForm() {
 
       <Card className="w-full max-w-md shadow-2xl border-border/50 backdrop-blur-sm bg-card/95 animate-scale-in relative z-10">
         <CardHeader className="space-y-3 text-center">
-          <div className="mx-auto w-16 h-16 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/30 hover-scale">
-            <Bus className="w-10 h-10 text-primary-foreground" />
+          <div className="mx-auto w-16 h-16 flex items-center justify-center hover-scale">
+            <img
+              src="../../favicon.ico"
+              alt="Bus"
+              className="w-10 h-10 object-contain"
+            />
           </div>
           <CardTitle className="text-3xl font-bold text-foreground">
             Terminal Alameda
