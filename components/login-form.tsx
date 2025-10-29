@@ -51,7 +51,7 @@ export function LoginForm() {
           <div className="mx-auto w-16 h-16 flex items-center justify-center hover-scale">
             <img
               src="../../favicon.ico"
-              alt="Bus"
+              alt="Logo Pullman"
               className="w-10 h-10 object-contain"
             />
           </div>

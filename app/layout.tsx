@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "@/contexts/auth-context";
 import { WebSocketProvider } from "@/contexts/websocket-context";
-import { Toaster } from "@/components/ui/toaster";
+import { AuthenticatedToaster } from "@/components/authenticated-toaster";
 import "./globals.css";
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -26,7 +26,7 @@ export default function RootLayout({
         <AuthProvider>
           <WebSocketProvider>
             {children}
-            <Toaster />
+            <AuthenticatedToaster />
           </WebSocketProvider>
         </AuthProvider>
         {/* <Analytics /> */}
