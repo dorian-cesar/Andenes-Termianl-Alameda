@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Clock, MapPin, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useRef } from "react";
 
 type KuposService = {
   id: number;
@@ -26,6 +25,7 @@ type KuposService = {
 export function SchedulePanel() {
   const [schedules, setSchedules] = useState<KuposService[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const hasFetched = useRef(false);
 
   const ciudadMap: Record<number, string> = {
@@ -52,15 +52,19 @@ export function SchedulePanel() {
   const fetchSchedules = async () => {
     try {
       setLoading(true);
+      setError(null);
       const res = await fetch("/api/schedules");
-      if (!res.ok) throw new Error("Error en la respuesta");
+      if (!res.ok) throw new Error("Error en la respuesta del servidor");
       const data = await res.json();
 
       if (data.schedules) {
         setSchedules(data.schedules);
+      } else {
+        throw new Error("Formato de respuesta inválido");
       }
     } catch (err) {
       console.error("Error cargando servicios:", err);
+      setError("Error cargando servicios");
     } finally {
       setLoading(false);
     }
@@ -69,7 +73,6 @@ export function SchedulePanel() {
   useEffect(() => {
     if (hasFetched.current) return;
     hasFetched.current = true;
-
     fetchSchedules();
   }, []);
 
@@ -104,6 +107,8 @@ export function SchedulePanel() {
           <p className="text-center text-muted-foreground py-8">
             Cargando servicios de Pullman...
           </p>
+        ) : error ? (
+          <p className="text-center text-muted-foreground py-8">{error}</p>
         ) : departures.length === 0 ? (
           <p className="text-center text-muted-foreground py-8">
             No hay salidas programadas
