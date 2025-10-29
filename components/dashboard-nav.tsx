@@ -24,9 +24,9 @@ const navItems = [
     href: "/dashboard/aforo",
   },
   {
-    title: "Salidas/Llegadas",
+    title: "Salidas",
     icon: Calendar,
-    href: "/dashboard/salidas-llegadas",
+    href: "/dashboard/salidas",
   },
   {
     title: "Historial",

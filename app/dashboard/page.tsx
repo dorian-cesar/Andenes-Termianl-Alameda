@@ -75,7 +75,7 @@ export default function DashboardPage() {
       color: "bg-primary/10 text-primary border-primary/20",
     },
     {
-      title: "Salidas/Llegadas",
+      title: "Salidas",
       description: "Próximos viajes programados",
       icon: Calendar,
       href: "/dashboard/salidas-llegadas",
