@@ -161,9 +161,7 @@ export function BarrierControls() {
                           {barrier.location}
                         </div>
                       </div>
-                      <StatusIcon
-                        className={cn("w-6 h-6 hover-scale", config.color)}
-                      />
+                      <StatusIcon className={cn("w-6 h-6", config.color)} />
                     </div>
 
                     {/* Status Badge */}
