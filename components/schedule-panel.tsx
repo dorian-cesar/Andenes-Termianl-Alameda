@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Clock, MapPin, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useRef } from "react";
 
 type KuposService = {
   id: number;
@@ -25,6 +26,7 @@ type KuposService = {
 export function SchedulePanel() {
   const [schedules, setSchedules] = useState<KuposService[]>([]);
   const [loading, setLoading] = useState(true);
+  const hasFetched = useRef(false);
 
   const ciudadMap: Record<number, string> = {
     2070: "Viña del Mar",
@@ -65,6 +67,9 @@ export function SchedulePanel() {
   };
 
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
     fetchSchedules();
   }, []);
 
