@@ -55,10 +55,7 @@ export function AlertsPanel() {
           <div className="flex items-center gap-2">
             <CardTitle className="text-primary">Alertas del Sistema</CardTitle>
             {unreadCount > 0 && (
-              <Badge
-                variant="destructive"
-                className="rounded-full animate-pulse"
-              >
+              <Badge variant="destructive" className="rounded-full">
                 {unreadCount}
               </Badge>
             )}
