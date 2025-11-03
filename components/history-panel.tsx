@@ -1,25 +1,39 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import type { BusEntry } from "@/types/platform"
-import { generateMockHistory, calculateStats } from "@/lib/history-data"
-import { Clock, DollarSign, Bus, Calendar, Search, TrendingUp } from "lucide-react"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import type { BusEntry } from "@/types/platform";
+import { generateMockHistory, calculateStats } from "@/lib/history-data";
+import {
+  Clock,
+  DollarSign,
+  Bus,
+  Calendar,
+  Search,
+  TrendingUp,
+} from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export function HistoryPanel() {
-  const [history, setHistory] = useState<BusEntry[]>([])
-  const [searchTerm, setSearchTerm] = useState("")
-  const [filteredHistory, setFilteredHistory] = useState<BusEntry[]>([])
+  const [history, setHistory] = useState<BusEntry[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredHistory, setFilteredHistory] = useState<BusEntry[]>([]);
 
   useEffect(() => {
-    const data = generateMockHistory()
-    setHistory(data)
-    setFilteredHistory(data)
-  }, [])
+    const data = generateMockHistory();
+    setHistory(data);
+    setFilteredHistory(data);
+  }, []);
 
   useEffect(() => {
     if (searchTerm) {
@@ -27,36 +41,38 @@ export function HistoryPanel() {
         (entry) =>
           entry.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
           entry.plateNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          entry.destination.toLowerCase().includes(searchTerm.toLowerCase()),
-      )
-      setFilteredHistory(filtered)
+          entry.destination.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredHistory(filtered);
     } else {
-      setFilteredHistory(history)
+      setFilteredHistory(history);
     }
-  }, [searchTerm, history])
+  }, [searchTerm, history]);
 
-  const stats = calculateStats(history)
+  const stats = calculateStats(history);
 
   const formatDate = (date: Date) => {
-    return new Date(date).toLocaleDateString("es-PE", {
+    return new Date(date).toLocaleDateString("es-CL", {
       day: "2-digit",
       month: "short",
       year: "numeric",
-    })
-  }
+      timeZone: "America/Santiago",
+    });
+  };
 
   const formatTime = (date: Date) => {
-    return new Date(date).toLocaleTimeString("es-PE", {
+    return new Date(date).toLocaleTimeString("es-CL", {
       hour: "2-digit",
       minute: "2-digit",
-    })
-  }
+      timeZone: "America/Santiago",
+    });
+  };
 
   const formatDuration = (minutes: number) => {
-    const hours = Math.floor(minutes / 60)
-    const mins = minutes % 60
-    return `${hours}h ${mins}m`
-  }
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return `${hours}h ${mins}m`;
+  };
 
   return (
     <div className="space-y-6">
@@ -83,8 +99,12 @@ export function HistoryPanel() {
                 <DollarSign className="w-5 h-5 text-green-600" />
               </div>
               <div>
-                <div className="text-2xl font-bold">S/. {stats.totalRevenue}</div>
-                <p className="text-xs text-muted-foreground">Ingresos Totales</p>
+                <div className="text-2xl font-bold">
+                  S/. {stats.totalRevenue}
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Ingresos Totales
+                </p>
               </div>
             </div>
           </CardContent>
@@ -97,8 +117,12 @@ export function HistoryPanel() {
                 <Clock className="w-5 h-5 text-amber-600" />
               </div>
               <div>
-                <div className="text-2xl font-bold">{formatDuration(stats.avgDuration)}</div>
-                <p className="text-xs text-muted-foreground">Estadía Promedio</p>
+                <div className="text-2xl font-bold">
+                  {formatDuration(stats.avgDuration)}
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Estadía Promedio
+                </p>
               </div>
             </div>
           </CardContent>
@@ -125,7 +149,9 @@ export function HistoryPanel() {
           <div className="flex items-center justify-between">
             <div>
               <CardTitle>Historial de Estadía</CardTitle>
-              <p className="text-sm text-muted-foreground mt-1">Registro completo de buses en el terminal</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Registro completo de buses en el terminal
+              </p>
             </div>
             <div className="flex items-center gap-2">
               <div className="relative">
@@ -159,7 +185,10 @@ export function HistoryPanel() {
               <TableBody>
                 {filteredHistory.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={9} className="text-center py-8 text-muted-foreground">
+                    <TableCell
+                      colSpan={9}
+                      className="text-center py-8 text-muted-foreground"
+                    >
                       No se encontraron registros
                     </TableCell>
                   </TableRow>
@@ -178,16 +207,26 @@ export function HistoryPanel() {
                       </TableCell>
                       <TableCell>{entry.destination}</TableCell>
                       <TableCell>
-                        <Badge variant="secondary">A{entry.platformId.split("-")[1]}</Badge>
+                        <Badge variant="secondary">
+                          A{entry.platformId.split("-")[1]}
+                        </Badge>
                       </TableCell>
-                      <TableCell className="text-sm">{formatTime(entry.entryTime)}</TableCell>
-                      <TableCell className="text-sm">{entry.exitTime ? formatTime(entry.exitTime) : "-"}</TableCell>
+                      <TableCell className="text-sm">
+                        {formatTime(entry.entryTime)}
+                      </TableCell>
+                      <TableCell className="text-sm">
+                        {entry.exitTime ? formatTime(entry.exitTime) : "-"}
+                      </TableCell>
                       <TableCell>
                         <span className="text-sm font-medium">
-                          {entry.duration ? formatDuration(entry.duration) : "-"}
+                          {entry.duration
+                            ? formatDuration(entry.duration)
+                            : "-"}
                         </span>
                       </TableCell>
-                      <TableCell className="text-right font-semibold text-green-600">S/. {entry.cost || 0}</TableCell>
+                      <TableCell className="text-right font-semibold text-green-600">
+                        S/. {entry.cost || 0}
+                      </TableCell>
                     </TableRow>
                   ))
                 )}
@@ -205,5 +244,5 @@ export function HistoryPanel() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

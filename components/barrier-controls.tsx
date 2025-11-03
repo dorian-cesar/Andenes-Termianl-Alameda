@@ -180,9 +180,10 @@ export function BarrierControls() {
                           <span>
                             {new Date(
                               barrier.lastAction.timestamp
-                            ).toLocaleTimeString("es-PE", {
+                            ).toLocaleTimeString("es-CL", {
                               hour: "2-digit",
                               minute: "2-digit",
+                              timeZone: "America/Santiago",
                             })}
                           </span>
                         </div>

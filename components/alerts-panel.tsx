@@ -130,10 +130,11 @@ export function AlertsPanel() {
                         <div className="flex items-center gap-2">
                           <span className="text-xs text-muted-foreground">
                             {new Date(alert.timestamp).toLocaleTimeString(
-                              "es-PE",
+                              "es-CL",
                               {
                                 hour: "2-digit",
                                 minute: "2-digit",
+                                timeZone: "America/Santiago",
                               }
                             )}
                           </span>
