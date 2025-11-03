@@ -13,7 +13,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: `Control de Andenes - ${info.terminal}`,
-  description: "Sistema de control y gestión de andenes para terminal de buses",
+  description: `Sistema de control y gestión de andenes de buses para ${info.terminal}`,
 };
 
 export default function RootLayout({
