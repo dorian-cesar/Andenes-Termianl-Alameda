@@ -1,33 +1,33 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { useAuth } from "@/contexts/auth-context"
-import { DashboardHeader } from "@/components/dashboard-header"
-import { DashboardNav } from "@/components/dashboard-nav"
-import { SchedulePanel } from "@/components/schedule-panel"
-import { Spinner } from "@/components/ui/spinner"
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/auth-context";
+import { DashboardHeader } from "@/components/dashboard-header";
+import { DashboardNav } from "@/components/dashboard-nav";
+import { SchedulePanel } from "@/components/schedule-panel";
+import { Spinner } from "@/components/ui/spinner";
 
-export default function SalidasLlegadasPage() {
-  const { user, isLoading } = useAuth()
-  const router = useRouter()
+export default function SalidasPage() {
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     if (!isLoading && !user) {
-      router.push("/login")
+      router.push("/login");
     }
-  }, [user, isLoading, router])
+  }, [user, isLoading, router]);
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Spinner className="w-8 h-8" />
       </div>
-    )
+    );
   }
 
   if (!user) {
-    return null
+    return null;
   }
 
   return (
@@ -40,5 +40,5 @@ export default function SalidasLlegadasPage() {
         </div>
       </main>
     </div>
-  )
+  );
 }

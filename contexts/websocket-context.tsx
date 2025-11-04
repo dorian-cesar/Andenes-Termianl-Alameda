@@ -113,6 +113,12 @@ export function WebSocketProvider({ children }: { children: ReactNode }) {
     };
 
     setAlerts((prev) => [alert, ...prev]);
+
+    toast({
+      title: alert.title,
+      description: alert.message,
+      className: "border-2 border-green-500 text-green-600",
+    });
   };
 
   const handleAlert = () => {
