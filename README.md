@@ -19,7 +19,6 @@ Permite controlar la asignación de andenes, monitorear llegadas y salidas, gest
 ### Backend
 
 - [Node.js](https://nodejs.org/) + [Express](https://expressjs.com/) — Servidor REST
-- [MongoDB](https://www.mongodb.com/) con [Mongoose](https://mongoosejs.com/) — Base de datos NoSQL
 - [Socket.IO](https://socket.io/) — Canal de comunicación en tiempo real
 - [JWT](https://jwt.io/) — Autenticación segura
 - [dotenv](https://www.npmjs.com/package/dotenv) — Configuración de entorno
@@ -28,10 +27,8 @@ Permite controlar la asignación de andenes, monitorear llegadas y salidas, gest
 
 ## 🧩 Funcionalidades principales
 
-- 🔐 **Autenticación y roles** (administrador, operador, supervisor)
+- 🔐 **Autenticación y roles** (administrador y operador)
 - 🚌 **Gestión de andenes**: asignación, liberación y seguimiento en tiempo real
-- 🚍 **Control de buses y choferes**
 - 📋 **Registro de llegadas y salidas**
 - 📡 **Panel en tiempo real** con alertas y estados visuales
 - 💬 **Notificaciones instantáneas** mediante WebSockets
-- 📊 **Dashboard de métricas**: ocupación, puntualidad y rendimiento
