@@ -1,30 +1,37 @@
-# Bus terminal platform
+# 🚌 Sistema de Gestión de Andenes
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+Aplicación web para la **gestión integral de andenes** en terminales de buses.  
+Permite controlar la asignación de andenes, monitorear llegadas y salidas, gestionar conductores y buses, y visualizar el estado en tiempo real desde una interfaz moderna construida con **Next.js** y un backend en **Node.js**.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/doriancelu-5490s-projects/v0-bus-terminal-platform)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/NvtYLXhHv7x)
+---
 
-## Overview
+## 🚀 Tecnologías principales
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+### Frontend
 
-## Deployment
+- [Next.js 14+](https://nextjs.org/) — Framework React moderno con soporte para SSR y App Router
+- [Tailwind CSS](https://tailwindcss.com/) — Estilos rápidos y consistentes
+- [Shadcn/UI](https://ui.shadcn.com/) — Componentes accesibles y elegantes
+- [Framer Motion](https://www.framer.com/motion/) — Animaciones suaves
+- [Redux Toolkit](https://redux-toolkit.js.org/) — Gestión de estado global
+- [Socket.IO Client](https://socket.io/) — Comunicación en tiempo real
 
-Your project is live at:
+### Backend
 
-**[https://vercel.com/doriancelu-5490s-projects/v0-bus-terminal-platform](https://vercel.com/doriancelu-5490s-projects/v0-bus-terminal-platform)**
+- [Node.js](https://nodejs.org/) + [Express](https://expressjs.com/) — Servidor REST
+- [MongoDB](https://www.mongodb.com/) con [Mongoose](https://mongoosejs.com/) — Base de datos NoSQL
+- [Socket.IO](https://socket.io/) — Canal de comunicación en tiempo real
+- [JWT](https://jwt.io/) — Autenticación segura
+- [dotenv](https://www.npmjs.com/package/dotenv) — Configuración de entorno
 
-## Build your app
+---
 
-Continue building your app on:
+## 🧩 Funcionalidades principales
 
-**[https://v0.app/chat/projects/NvtYLXhHv7x](https://v0.app/chat/projects/NvtYLXhHv7x)**
-
-## How It Works
-
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+- 🔐 **Autenticación y roles** (administrador, operador, supervisor)
+- 🚌 **Gestión de andenes**: asignación, liberación y seguimiento en tiempo real
+- 🚍 **Control de buses y choferes**
+- 📋 **Registro de llegadas y salidas**
+- 📡 **Panel en tiempo real** con alertas y estados visuales
+- 💬 **Notificaciones instantáneas** mediante WebSockets
+- 📊 **Dashboard de métricas**: ocupación, puntualidad y rendimiento
